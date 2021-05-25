@@ -1,0 +1,8 @@
+설치 : npm install pm2 -g (관리자 권한이어야함.)
+
+실행 : pm2 start helloworld
+
+powerShell 에서 pm2 가 안실행되면
+powerShell 관리자 권한으로 열고
+
+Get-ExecutionPolicy 로 쳤을때 RemoteSigned 가 아니면 Set-ExecutionPolicy RemoteSigned를 입력한다.

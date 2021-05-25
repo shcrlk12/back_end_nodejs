@@ -1,0 +1,2 @@
+npm install mysql 
+하고 사용
