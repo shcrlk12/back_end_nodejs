@@ -65,6 +65,32 @@ const dbRowDelete = (id, cb) => {
   }
 });}
 
+const dbRowDataUpdate = (id, data, cb) => {
+  connection.query(`UPDATE blogData SET _data = "${data}", _modify_data = DATE_FORMAT(now(), '%Y년 %m월 %d일 %H:%i') WHERE _id = ${id};`, (err, results, fields) => {
+
+  if(err)
+  {
+    console.log(err);
+  }
+  else{
+    console.log(results);
+    cb('OK!');
+  }
+});}
+
+const dbRowLikeUpdate = (id, like, cb) => {
+  connection.query(`UPDATE blogData SET _like = "${like}" WHERE _id = ${id};`, (err, results, fields) => {
+
+  if(err)
+  {
+    console.log(err);
+  }
+  else{
+    console.log(results);
+    cb('OK!');
+  }
+});}
+
 // connection.end();
 
 /*******************
@@ -119,13 +145,18 @@ app.post('/create/blogData', (req, res) => {//request 로 받아서 title에 넣
   });
 });
 
-/*
-app.get('/update/blogData', (req, res) => {
-  dbSelect((results)=>{
-    res.send(results)
+app.post('/update/blogData', (req, res) => {
+  dbRowDataUpdate(req.body.Id, req.body.data, (str)=>{
+    res.send(str);
   });
 });
-*/
+
+app.post('/update/blogLikeNumber', (req, res) => {
+  dbRowLikeUpdate(req.body.Id, req.body.like, (str)=>{
+    res.send(str);
+  });
+});
+
 app.post('/delete/blogData', (req, res) => {
 
   console.log(req.body.deleteId);
